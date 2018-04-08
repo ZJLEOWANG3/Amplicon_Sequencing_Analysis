@@ -1,7 +1,7 @@
 ---
 layout: page
 title: A tutorial for 16S rRNA gene amplicon sequencing analysis
-modified: June 28th 2017
+modified: July 18th 2017
 excerpt: "Created by Varun Srinivasan, Contributor: Guangyu Li"
 comments: true
 ---
@@ -9,6 +9,11 @@ comments: true
 {% include _toc.html %}
 
 This is an attempt to put together a comprehensive tutorial for amplicon sequencing analysis. This is meant to get people new to amplicon sequencing analysis started. Modifications to the code will be required if you need to do anything more than the basic analysis.
+
+Before you tackle this tutorial, you need to have a basic knowledge of the Unix Shell and bash. You don't need to master all these tutorials, but you should attempt to go through them atleast once before you tackle the rest of this tutorial.
+
+- [Unix Shell by swcarpentry](http://swcarpentry.github.io/shell-novice/)
+- [Command Line by Code Academy](https://www.codecademy.com/learn/learn-the-command-line/)
 
 # Software Installation Instructions
 You are going to need the following software to run this analysis.
@@ -78,15 +83,15 @@ tar -xzvf Silva.nr_v123.tgz
 ```
 
 ## MiDAS Taxonomy
-The [MiDAS:Field Guide](http://www.midasfieldguide.org/) was created [McIlroy et al(2015)](http://database.oxfordjournals.org/content/2015/bav062.full?sid=6829f12b-4ae3-4258-acbe-d437059d55ac). This is a online resource that aims to help researchers and operators identify microorganisms relevant to wastewater treatment and understand their role. As part of this project, the researchers have also created the MiDAS taxonomy which is a manual curation of the SILVA taxonomy.
+The [MiDAS:Field Guide](http://www.midasfieldguide.org/) was created [McIlroy et al(2015)](http://database.oxfordjournals.org/content/2015/bav062.full?sid=6829f12b-4ae3-4258-acbe-d437059d55ac). This is a online resource that aims to help researchers and operators identify microorganisms relevant to wastewater treatment and understand their role. As part of this project, the researchers have also created the MiDAS taxonomy which is a manual curation of the SILVA taxonomy. The available version as of July 2017 is curated from [SILVA v123](https://www.arb-silva.de/documentation/release-123/).
 
-The MiDAS taxonomy comes formatted for QIIMe but not mothur. I created a script to format the taxonomy file to the mothur format (*github link coming soon*).
+The MiDAS taxonomy comes formatted for QIIME but not mothur. I have formatted the QIIME version to mothur format and will provide the files.
 
-I will provide a link to the pre-formatted taxonomy file and the aligned sequences (fasta file) to you.
+<mark>In case you are interested I created a script to format the taxonomy file to the mothur format- [MiDAS_qiimetomothur.sh](https://github.com/vnsriniv/Amplicon_Sequencing_Analysis/blob/master/custom_scripts/midas_qiimetomothur.sh) and use the script to format it to mothur.
+You can download the MiDAS files from the [MiDAS:Field Guide](http://www.midasfieldguide.org/) website- [MiDAS_S123_2.13](http://midasfieldguide.org/download/midas_v2_13/midas_s123_213tar.gz). I would check on the website first to make sure this is the latest version. </mark>
 
 
 Now we have installed all necessary softwares and downloaded all required files. Let us proceed with some preprocessing steps and the actual analysis.
-
 # Create Custom Alignment Database
 We will first customize the SILVA database to our region of interest (V4). This is mainly to reduce computational memory and time required during our downstream analysis.
 
@@ -290,7 +295,7 @@ contig_file="mothur.batch.files.txt"
 align_ref="silva.nr_v123.v4.align"
 # classify databse; make sure that the _ref and _tax file are part of the same database
 classify_ref="MiDAS_v123_2.1.3.fasta"
-classify_tax="midas_mothur.tax"
+classify_tax="MiDAS_v123_2.1.3.mothur.tax"
 # end of customizing
 ###########################################################################################
 # anything below should be fine without changing
@@ -338,7 +343,6 @@ ReplaceVariable mothur_batch_v4_script.txt '\$classify_tax\$' $classify_tax
 
 echo "running mothur .."
 mothur mothur_batch_v4_script.txt
-
 ```
 
 For running this script, simply run
@@ -349,3 +353,25 @@ bash mothur_batch_v4_job.sh
 
 This code will check the existance of all necessary files, configure the mothur script and finally run mothur. If any of the required files are missing, the execution will terminate. Though not necessary, it is recommended to run this script from the project directory as a good practice.
 Note that the lines start with #SBATCH work only when you run this script in batch mode on a server which uses a SLURM job manager. Otherwise (e.g. on your local machine), these lines are ignored.
+
+# Downstream Analysis
+Now that we have the OTU table and taxonomic classification for the OTUs, the next step is to perform downstream analysis of this data to create figures and perform statistical tests. Since this is extremely dependent on your experiment and the particular hypotheses you are testing, I will only include a few resources for microbial ecology analysis in R for you to go through.
+
+```Note: There are many packages and platforms for you to perform your analysis in R. I will highlight a few that I have used before and some general resources for R. In the end, it is your choice and perference that will dictate which ones you use.```
+
+## General R Tutorials
+- [Programming with R](http://swcarpentry.github.io/r-novice-inflammation/)
+- [R for Reproducible Scientific Analysis](http://swcarpentry.github.io/r-novice-gapminder/)
+
+## Tidyverse Tutorial
+Tidyverse is a set of R packages designed for easy data manipulation and analysis. I have found that use of these packages makes code more readable and easy to follow (both for your future-self and for others).
+- [General Tidyverse Tutorial](http://www.fabianheld.com/r-tidyverse/)
+- [ggplot 2 Tutorial](http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html#org93999d8)
+
+## Microbial Ecology Tutorials
+Here is a list of packages for Microbial Ecology Analysis using R with tutorials.
+- [Ampvis](http://madsalbertsen.github.io/ampvis/examples/ampvis_guide.html)
+- [Phyloseq](https://joey711.github.io/phyloseq/import-data.html)
+
+Here is a Microbial Informatics course material that Pat Schloss has posted which covers best practices for reporoducible research and statistical analyses in R.
+- [Microbial Informatics](http://microbialinformatics.github.io/)
