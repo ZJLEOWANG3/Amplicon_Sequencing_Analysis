@@ -74,8 +74,8 @@ class MothurSilvaRefDB(object):
 		self._flist = list()
 		return
 
-	def log(self, msg: str):
-		print(msg, file = sys.stderr)
+	def log(self, msg: str, *, file = sys.stderr):
+		print(msg, file = file)
 		return self
 
 	def call_external(self, cmd: list):
@@ -99,20 +99,20 @@ class MothurSilvaRefDB(object):
 	def extract_files(self, tar = "tar"):
 		for fname in self._flist:
 			self.log("extracting: %s" % fname)
-			self.call_external([tar, "-zxf", fname])
+			self.call_external([tar, "-zxC", self.output_dir, "-f", fname])
 		return self
 
 	def filter_align(self, threads, mothur = "mothur"):
 		for c in ["nr", "seed"]:
 			proto = "%s_%s" % (c, self.silva_ver)
 			# file names
-			ifname = "silva.%s.align" % proto
-			pfname = "silva.%s.pcr.align" % proto
+			ifname = os.path.join(self.output_dir, "silva.%s.align" % proto)
+			pfname = os.path.join(self.output_dir, "silva.%s.pcr.align" % proto)
 			ofname = ifname + ".v4"
 			# mothur align
 			self.log("mothur pcr: %s" % ifname)
-			script = (r"'#pcr.seqs(fasta=%s, start=11894, end=25319, "\
-				"keepdots=F, processors=%d)'") % (ifname, threads)
+			script = ("#pcr.seqs(fasta=%s, start=11894, end=25319, "\
+				"keepdots=F, processors=%d)") % (ifname, threads)
 			self.call_external([mothur, script])
 			# rename output
 			self.call_external(["mv", pfname, ofname])
