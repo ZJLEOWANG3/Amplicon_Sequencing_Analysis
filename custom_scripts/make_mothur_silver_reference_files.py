@@ -44,7 +44,7 @@ def get_args():
 	n_cpus = multiprocessing.cpu_count()
 	ap.add_argument("-t", "--num-threads", type = NonNegInt, default = n_cpus,
 		metavar = "int",
-		help = "number of theads used by mothur; 0 stands for using all "
+		help = "number of threads used by mothur; 0 stands for using all "
 			"(default: %d)" % n_cpus)
 	ap.add_argument("-k", "--keep", action = "store_true",
 		help = "do not delete downloaded archives (default: off)")

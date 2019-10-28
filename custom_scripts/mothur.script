@@ -17,8 +17,7 @@ set.logfile(name=mothur/mothur.log)
 make.contigs(file=mothur.input.list, processors=12)
 # make summary then filtering
 summary.seqs(fasta=current)
-screen.seqs(fasta=current, group=current, summary=current, maxambig=0,
-	maxlength=275)
+screen.seqs(fasta=current, group=current, summary=current, maxambig=0, maxlength=275)
 # dereplicate sequences
 unique.seqs(fasta=current)
 # make sequence counting table for future summary use
@@ -35,8 +34,7 @@ align.seqs(fasta=current, template=ref_db/align.fasta, flip=t)
 # the start and end positions are important for later extraction
 summary.seqs(fasta=current, count=current)
 # extract alignment regions only using spotted range in above summary
-screen.seqs(fasta=current, count=current, summary=current, start=1968,
-	end=11550, maxhomop=8)
+screen.seqs(fasta=current, count=current, summary=current, start=1968, end=11550, maxhomop=8)
 summary.seqs(fasta=current, count=current)
 # filter seqs that are overlapping the same range on reference
 # NOTE: vertical=T removes columns containing *ONLY* gap
@@ -65,19 +63,16 @@ remove.seqs(fasta=current, accnos=current)
 # NOTE: cutoff=80 sets the confidence to be at minimum 80%; any assignments
 #	below this treshold will not be reported (but are done); using cutoff=0 will
 #	force report all assignments
-classify.seqs(fasta=current, count=current, reference=ref_db/classif.ref,
-	taxonomy=ref_db/classif.tax, cutoff=80)
+classify.seqs(fasta=current, count=current, reference=ref_db/classif.ref, taxonomy=ref_db/classif.tax, cutoff=80)
 # remove unwanted linages
-remove.lineage(fasta=current, count=current, taxonomy=current,
-	taxon=Chloroplast-Mitochondria-unknown-Eukaryota)
+remove.lineage(fasta=current, count=current, taxonomy=current, taxon=Chloroplast-Mitochondria-unknown-Eukaryota)
 summary.tax(taxonomy=current, count=current)
 # [optional] assessing error rates if have mock community (internal control)
 # NOTE: change parameters accordingly:
 #	groups=Mock: group label of the mock community
 #	reference=HMP_MOCK.v35.fasta: reference of the mock community
 #get.groups(fasta=current, count=current, groups=Mock)
-#seq.error(fasta=current, count=current, reference=HMP_MOCK.v35.fasta,
-#	aligned=F)
+#seq.error(fasta=current, count=current, reference=HMP_MOCK.v35.fasta, #	aligned=F)
 # may also with to remove the mock community in the final output
 #remove.groups(fasta=current, count=current, taxonomy=current, groups=Mock)
 
@@ -88,8 +83,7 @@ summary.tax(taxonomy=current, count=current)
 # of distance matrix may be unfeasible
 # first split into clusters
 # NOTE: cutoff=0.03 means split clusters at 0.97 identity level (empirical)
-cluster.split(fasta=current, count=current, taxonomy=current,
-	splitmethod=classify, taxlevel=4, cutoff=0.03)
+cluster.split(fasta=current, count=current, taxonomy=current, splitmethod=classify, taxlevel=4, cutoff=0.03)
 # create count table for each splitted cluster
 make.shared(list=current, count=current, label=0.03)
 # make otu table for each splitted cluster
