@@ -29,11 +29,11 @@ ln -sfT $db_dir/MIDAS_DB/MiDAS_S123_2.1.3.mothur.tax			$ln_dir/midas_s123.mothur
 ################################################################################
 # alignment template, used in template (a.k.a. reference) in align.seqs()
 # use seed in alignment is fine
-ln -sfT $ln_dir/silva.seed_v128.align.v4						$ln_dir/align.fasta
+ln -sfT silva.seed_v128.align.v4								$ln_dir/align.fasta
 # taxonomy classif. reference and labels
 # NOT use seed seqs here
-ln -sfT $ln_dir/silva.nr_v128.align.v4							$ln_dir/classif.ref
-ln -sfT $ln_dir/silva.nr_v128.tax								$ln_dir/classif.tax
+ln -sfT silva.nr_v128.align.v4									$ln_dir/classif.ref
+ln -sfT silva.nr_v128.tax										$ln_dir/classif.tax
 # or, use midas as reference
-#ln -sfT $ln_dir/midas_s123.fasta								$ln_dir/classif.ref
-#ln -sfT $ln_dir/midas_s123.tax									$ln_dir/classif.tax
+#ln -sfT midas_s123.fasta										$ln_dir/classif.ref
+#ln -sfT midas_s123.tax											$ln_dir/classif.tax
