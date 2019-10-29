@@ -7,8 +7,8 @@
 #SBATCH --mem 8GB
 
 # dir settings
-set.dir(input=., output=mothur)
-set.logfile(name=mothur/mothur.log)
+set.dir(input=., output=mothur.output)
+set.logfile(name=mothur.output/mothur.log)
 
 ################################################################################
 # P1. assembly and dereplicate

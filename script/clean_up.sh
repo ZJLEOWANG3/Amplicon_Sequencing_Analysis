@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf mothur/
+rm -rf mothur.output/
 rm -f mothur.output.tar.gz
 rm -f mothur.*.logfile
 rm -f sbatch.mothur.*
