@@ -1,8 +1,10 @@
 Mothur analysis project outline
 ===============================
 
-Files and directories
+Directories and files
 ---------------------
+
+![directories and files](auxiliary/dirs_and_files.png)
 
 * `reads/`: directory of all raw fastq files
 * `reads_qc/`: directory of qc'd fastq files
