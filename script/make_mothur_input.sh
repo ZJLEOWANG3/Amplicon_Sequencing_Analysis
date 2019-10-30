@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sample_list="samples.list"
-input_list="mothur.input.list.c"
+input_list="mothur.input.list"
 fastq_dir="mothur.input.fastq"
 
 # clean old mothur.input.list
