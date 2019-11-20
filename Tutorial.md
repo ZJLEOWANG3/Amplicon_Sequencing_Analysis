@@ -1,9 +1,11 @@
 ---
 layout: page
 title: A tutorial for 16S rRNA gene amplicon sequencing analysis
-modified: July 18th 2017
+modified: "July 18th 2017, Nov 20th 2019"
 excerpt: "Created by Varun Srinivasan, Contributor: Guangyu Li"
 comments: true
+output:
+  html_document
 ---
 
 {% include _toc.html %}
@@ -83,7 +85,25 @@ tar -xzvf Silva.nr_v123.tgz
 ```
 
 ## MiDAS Taxonomy
-The [MiDAS:Field Guide](http://www.midasfieldguide.org/) was created [McIlroy et al(2015)](http://database.oxfordjournals.org/content/2015/bav062.full?sid=6829f12b-4ae3-4258-acbe-d437059d55ac). This is a online resource that aims to help researchers and operators identify microorganisms relevant to wastewater treatment and understand their role. As part of this project, the researchers have also created the MiDAS taxonomy which is a manual curation of the SILVA taxonomy. The available version as of July 2017 is curated from [SILVA v123](https://www.arb-silva.de/documentation/release-123/).
+The [MiDAS: Field Guide](http://www.midasfieldguide.org/) was created [McIlroy et al(2015)](http://database.oxfordjournals.org/content/2015/bav062.full?sid=6829f12b-4ae3-4258-acbe-d437059d55ac). This is a online resource that aims to help researchers and operators identify microorganisms relevant to wastewater treatment and understand their role. As part of this project, the researchers have also created the MiDAS taxonomy which is a manual curation of the SILVA taxonomy.
+As of Nov 2019, the newest MiDAS release 3.6 (4.0 in under way) is curated from SILVA v132 release. There are some big changes in SILVA v132 despite its growth in size; the biggest change perhaps, `Betaproteobacteria` is no longer a class taxon but re-placed under `Gammaproteobacteria` in order-rank (`Betaproteobacteriales`).
+Therefore the old MiDAS release is out-dated, also no longer available for download. Instead, the new release is distributed in new format. Here we explain the incorporation of this new release into our mothur pipeline. If one is still using or interested in the old, checkout [here](#oldmidas).
+
+The newest MiDAS taxonomy distribution can be found at [MiDAS: Field Guide/Downloads](https://www.midasfieldguide.org/guide/downloads). We then need to make it into mothur-recognizable format. I have already created a script to have majority of this job done (assume the downloaded file is renamed as `MiDAS_S132_36.fa`):
+```
+bash custom_scripts/midas_nov2019_to_mothur.sh MiDAS_S132_36.fa
+```
+Now we shall have two outputs, `MiDAS_S132_36.fa.mothur.fasta` and `MiDAS_S132_36.fa.mothur.tax`. These to files can be used in standalone, but better together with its original SILVA database. To do this, we need to verify the original SILVA version which it is curated from. In this example, MiDAS 3.6 is from SILVA v132, so we will download the corresponding reference files (see previous section) and concatenate respectively:
+```
+cat silva.nr_v132.align MiDAS_S132_36.fa.mothur.fasta > silva.nr_v132.midas.36.fasta
+cat silva.nr_v132.tax MiDAS_S132_36.fa.mothur.tax > silva.nr_v132.midas.36.tax
+```
+Now we can use these files with `classify.seqs()` or `classify.otus()` in mothur pipeline.
+NOTE: we don't have to use the ungapped fasta or a specific region (v1-4) as classification reference.
+
+### Old MiDAS Release {#oldmidas}
+The old MiDAS release is no longer available for download. The section here is kept as a reference for our old approach during 2017-2018.
+The available version as of July 2017 is curated from [SILVA v123](https://www.arb-silva.de/documentation/release-123/).
 
 The MiDAS taxonomy comes formatted for QIIME but not mothur. I have formatted the QIIME version to mothur format and will provide the files.
 
