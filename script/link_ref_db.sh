@@ -36,4 +36,4 @@ ln -sfT /link/to/align/ref/e.g./silva.seed_v132.align.v4		$ln_dir/align.fasta
 # taxonomy classif. reference and labels
 # NOT use seed seqs here
 ln -sfT /link/to/classif/ref/e.g./midas_s132.fasta				$ln_dir/classif.ref
-ln -sfT /link/to/classif/tax/e.g./midas_s123.mothur.tax			$ln_dir/classif.tax
+ln -sfT /link/to/classif/tax/e.g./midas_s132.mothur.tax			$ln_dir/classif.tax

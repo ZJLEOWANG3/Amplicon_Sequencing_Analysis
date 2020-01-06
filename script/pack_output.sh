@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# pack all mothur outputs
 tar -jcf mothur.output.tar.bz2 \
-	mothur.output/*.pick.pick.fasta \
-	mothur.output/*.opti_mcc.*
+	mothur.*.logfile \
+	sbatch.mothur.* \
+	mothur.output/ \
+	mothur.output.shared \
+	mothur.output.tax
