@@ -3,8 +3,8 @@
 #SBATCH -J AMPLICON
 #SBATCH -o sbatch.mothur.log
 #SBATCH -e sbatch.mothur.err
-#SBATCH -p general -N 1 -c 12
-#SBATCH --mem 8GB
+#SBATCH -p short -N 1 -c 12
+#SBATCH --mem 32GB
 
 # dir settings
 set.dir(input=., output=mothur.output)
