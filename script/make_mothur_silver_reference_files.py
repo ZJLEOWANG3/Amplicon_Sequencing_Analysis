@@ -8,6 +8,10 @@ import sys
 
 
 MOTHUR_SILVA_REF_FILE_URL = {
+	"v138": {
+		"common": "https://mothur.s3.us-east-2.amazonaws.com/wiki/silva.nr_v138.tgz",
+		"seed": "https://mothur.s3.us-east-2.amazonaws.com/wiki/silva.seed_v138.tgz",
+	},
 	"v132": {
 		"common": "https://www.mothur.org/w/images/3/32/Silva.nr_v132.tgz",
 		"seed": "https://www.mothur.org/w/images/7/71/Silva.seed_v132.tgz",
