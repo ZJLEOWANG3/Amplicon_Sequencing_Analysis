@@ -1,1 +1,0 @@
-../../../git/BioinformaticsUtilities/mothur_amplicon_table_plot.py
