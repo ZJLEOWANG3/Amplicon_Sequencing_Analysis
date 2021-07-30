@@ -331,7 +331,7 @@ After 4.2-4.4, `ref_db` will look like:
 </pre>
 
 
-# 5 Preprocess
+# 5. Preprocess
 
 In this step, we will run `sickle` to filter raw reads and prepare other
 	essential files required to run `mothur`.
@@ -501,7 +501,7 @@ ZhouCA3220200211	mothur.input.fastq/ZhouCA3220200211_R1.fastq	mothur.input.fastq
 </pre>
 
 
-# 6 Running `mothur`
+# 6. Running `mothur`
 
 This section is adopted from `mothur` official tutorial at [https://mothur.org/wiki/miseq_sop/](https://mothur.org/wiki/miseq_sop/)
 
@@ -966,7 +966,7 @@ These output are situationally useful when digging up detailed information:
 * mothur.output.fasta: latest contigs
 * mothur.output.list: contigs belong to each OTU, at each analyzed cutoff level.
 
-# 7 Relative abundance analysis and plotting
+# 7. Relative abundance analysis and plotting
 
 To get relative abundance information, we only need the `*.shared` and `*.tax`
 	files from mothur output.
@@ -1041,7 +1041,7 @@ Note if a cell shows empty, the abundance is exactly zero.
 If a cell shows "min.", the value is not zero but still too small to display.
 
 
-# 8 Archiving the project
+# 8. Archiving the project
 
 Finally, it is critical to save the current status of the project for later
 	reference.
@@ -1063,4 +1063,4 @@ In addition to the outputs, I commonly also compress and archive:
 * other scripts used to save life
 
 
-# 9 Q&A
+# 9. Q&amp;A
