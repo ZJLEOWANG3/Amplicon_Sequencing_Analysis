@@ -139,7 +139,7 @@ Check out my repository [https://github.com/lguangyu/Amplicon_Sequencing_Analysi
 
 If you have git installed, it is as easy running below code:
 ```bash
-$ git clone -b anal_proj_struct git@github.com:lguangyu/Amplicon_Sequencing_Analysis.git
+$ git clone -b anal_proj_struct https://github.com/lguangyu/Amplicon_Sequencing_Analysis.git
 $ mv Amplicon_Sequencing_Analysis mothur_sop_tutorial
 ```
 
