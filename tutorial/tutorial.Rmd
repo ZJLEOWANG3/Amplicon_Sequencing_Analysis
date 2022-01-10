@@ -54,9 +54,9 @@ In such cases, remote access to such computers and related skills are required.
 
 ## 1.3 Pitfalls for Windows users
 
-* file names starting with a dot will bring immersively more pain than on Linux/MacOS
-* Windows uses reverse-slash (\\) as directory separator, while Linux/MacOS uses slash (/); many programming languages can handle this difference and allow use of slash in a compatibly
-* Windows uses '\\r\\n' as end-of-line (EOL) while Linux/current MacOS uses '\\n'; this may cause some text files shown as a huge single-line chunk, particularly with Windows' default text editor `notepad.exe`; note most text editor for programmers can deal with this problem
+* file names/directory names starting with a dot will bring immersively more pain than on Linux/MacOS
+* Windows uses reverse-slash (\\) as directory separator, while Linux/MacOS uses slash (/); many programming languages can handle this difference and allow use of slash as compatible solution, but only at some extent
+* Windows uses '\\r\\n' as end-of-line (EOL) while Linux/current MacOS uses single '\\n'; this cause the EOL from Linux/MacOS not being identified as line seperator on Windows, and instead showing all lines unseparated as a single huge chunk; note most programmer-oriented text editors (such as Sublime Text and Atom) can detect and deal with this problem; however other text editors without this capability (such as Windows' default text editor `notepad.exe`) will face a severe problem.
 
 ## <font color="#FF0000">1.4 File naming scheme</font>
 
