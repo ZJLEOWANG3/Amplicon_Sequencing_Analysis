@@ -12,7 +12,7 @@ for i in {phylum,class,order,family,genus}; do
 	| tee $abund_dir/$i.tsv \
 	| ./analysis_script/plot_mothur_taxonomy_abundance.py \
 		--plot-percent \
-		--max-n-taxons 40 \
+		--max-n-taxa 40 \
 		--plot-title $i \
 		-p $abund_dir/$i.png
 	# make transposed table
