@@ -10,7 +10,7 @@ for i in {phylum,class,order,family,genus}; do
 		-t mothur.output.tax \
 		-r $i \
 	| tee $abund_dir/$i.tsv \
-	| ./analysis_script/plot_mothur_taxonomy_abundance.py \
+	| ./analysis_script/table_plot_mothur_taxonomy_abundance.py \
 		--plot-percent \
 		--max-n-taxa 40 \
 		--plot-title $i \
@@ -25,7 +25,7 @@ done
 
 # specifically looking for paos
 for i in {genus,}; do
-	./analysis_script/plot_mothur_taxonomy_abundance.py \
+	./analysis_script/table_plot_mothur_taxonomy_abundance.py \
 		--taxon-list ./analysis_script/data/pao.genus.stokholm_et_al_2017.txt \
 		--plot-percent \
 		--plot-title "putative PAO $i abundances" \
