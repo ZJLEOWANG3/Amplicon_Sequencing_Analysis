@@ -4,10 +4,7 @@
 tar -jcf mothur.output.lite.tar.bz2 \
 	--exclude "*.tar.bz2" \
 	mothur.*.logfile \
-	sbatch.mothur.* \
 	mothur.input.list \
-	mothur.output/*.precluster.pick.pick.fasta \
-	mothur.output/*.denovo.vsearch.pick.pick.count_table \
-	mothur.output/*.opti_mcc.* \
-	mothur.output/mothur.log \
-	mothur.output.*
+	mothur.output/final.* \
+	mothur.output/*.mothur.log \
+	mothur.output/*.current_files.summary

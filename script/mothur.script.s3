@@ -1,40 +1,17 @@
 #!/usr/bin/env mothur
 
-#SBATCH -J AMPLICON
-#SBATCH -o sbatch.mothur.log
-#SBATCH -e sbatch.mothur.err
-#SBATCH -p short -N 1 -c 12
-#SBATCH --mem 32GB
-
 # dir settings
 set.dir(input=., output=mothur.output)
-set.logfile(name=mothur.output/mothur.log)
+set.logfile(name=mothur.output/s3.mothur.log)
+
+# resume last stage
+set.current(current=s2.current_files.summary)
 
 ################################################################################
-# P1. assembly and dereplicate
+# P2. alignment (screening)
 ################################################################################
-# make contigs from paired end sequences
-make.contigs(file=mothur.input.list, processors=12)
-# make summary then filtering
-summary.seqs(fasta=current)
-screen.seqs(fasta=current, group=current, summary=current, maxambig=0, maxlength=275)
-# dereplicate sequences
-unique.seqs(fasta=current)
-# make sequence counting table for future summary use
-count.seqs(name=current, group=current)
-summary.seqs(count=current)
-
-################################################################################
-# P2. alignment
-################################################################################
-# align seqs to reference
-# NOTE: flip=t is by default on
-align.seqs(fasta=current, template=ref_db/align.fasta, flip=t)
-# this summary checks the alignment results
-# the start and end positions are important for later extraction
-summary.seqs(fasta=current, count=current)
 # extract alignment regions only using spotted range in above summary
-screen.seqs(fasta=current, count=current, summary=current, start=1968, end=11550, maxhomop=8)
+screen.seqs(fasta=current, count=current, start=13870, end=23440)
 summary.seqs(fasta=current, count=current)
 # filter seqs that are overlapping the same range on reference
 # NOTE: vertical=T removes columns containing *ONLY* gap
@@ -43,7 +20,6 @@ summary.seqs(fasta=current, count=current)
 filter.seqs(fasta=current, vertical=T, trump=.)
 # find unique seqs in shared, overlapping range
 unique.seqs(fasta=current, count=current)
-summary.seqs(fasta=current, count=current)
 
 ################################################################################
 # P3. remove chimeras
@@ -51,9 +27,9 @@ summary.seqs(fasta=current, count=current)
 # pre.cluster hard clustering seqs with cluster diameter of <diffs>
 # in this case, maximum distances between seqs in a cluster is 2
 pre.cluster(fasta=current, count=current, diffs=2)
-# remove chimeras using vsearch
+# identify chimeras using vsearch, in 1.48.0 it only marks not removing
 chimera.vsearch(fasta=current, count=current, dereplicate=t)
-# then remove chimeras from fasta based on vsearch results (accnos)
+# remove chimeras
 remove.seqs(fasta=current, accnos=current)
 
 ################################################################################
@@ -63,7 +39,7 @@ remove.seqs(fasta=current, accnos=current)
 # NOTE: cutoff=80 sets the confidence to be at minimum 80%; any assignments
 #	below this treshold will not be reported (but are done); using cutoff=0 will
 #	force report all assignments
-classify.seqs(fasta=current, count=current, reference=ref_db/classif.ref, taxonomy=ref_db/classif.tax, cutoff=80)
+classify.seqs(fasta=current, count=current, reference=ref_db/silva.nr_v138_1.align, taxonomy=ref_db/silva.nr_v138_1.tax, cutoff=80)
 # remove unwanted linages
 remove.lineage(fasta=current, count=current, taxonomy=current, taxon=Chloroplast-Mitochondria-unknown-Eukaryota)
 summary.tax(taxonomy=current, count=current)
@@ -75,6 +51,11 @@ summary.tax(taxonomy=current, count=current)
 #seq.error(fasta=current, count=current, reference=HMP_MOCK.v35.fasta, #	aligned=F)
 # may also with to remove the mock community in the final output
 #remove.groups(fasta=current, count=current, taxonomy=current, groups=Mock)
+# rename files so that we don't get super-long output filenames
+rename.file(fasta=current, count=current, taxonomy=current, prefix=final)
+# save current file names
+get.current()
+rename.file(input=current_files.summary, new=s3.current_files.summary)
 
 ################################################################################
 # P5. OTU making
@@ -83,10 +64,16 @@ summary.tax(taxonomy=current, count=current)
 # of distance matrix may be unfeasible
 # first split into clusters
 # NOTE: cutoff=0.03 means split clusters at 0.97 identity level (empirical)
-cluster.split(fasta=current, count=current, taxonomy=current, splitmethod=classify, taxlevel=4, cutoff=0.03)
+cluster.split(fasta=current, count=current, taxonomy=current, taxlevel=4, cutoff=0.03)
 # create count table for each splitted cluster
 make.shared(list=current, count=current, label=0.03)
 # make otu table for each splitted cluster
 classify.otu(list=current, count=current, taxonomy=current, label=0.03)
-# generate otu counts in each sample (group)
-count.groups(shared=current)
+
+################################################################################
+# P6. ASV making
+################################################################################
+# create count table for each sequence
+make.shared(count=current, label=asv)
+# classify the taxonomy of each "otu (ASV)"
+classify.otu(list=final.asv.list, count=current, taxonomy=current, label=asv)

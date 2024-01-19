@@ -6,8 +6,8 @@ mkdir -p $abund_dir
 # make abundance table and plot
 for i in {phylum,class,order,family,genus}; do
 	./analysis_script/get_mothur_taxonomy_abundance.py \
-		-s mothur.output.shared \
-		-t mothur.output.tax \
+		-s mothur.output/final.opti_mcc.shared \
+		-t mothur.output/final.opti_mcc.0.03.cons.taxonomy \
 		-r $i \
 	| tee $abund_dir/$i.tsv \
 	| ./analysis_script/table_plot_mothur_taxonomy_abundance.py \
@@ -17,8 +17,8 @@ for i in {phylum,class,order,family,genus}; do
 		-p $abund_dir/$i.png
 	# make transposed table
 	./analysis_script/get_mothur_taxonomy_abundance.py \
-		-s mothur.output.shared \
-		-t mothur.output.tax \
+		-s mothur.output/final.opti_mcc.shared \
+		-t mothur.output/final.opti_mcc.0.03.cons.taxonomy \
 		-r $i --transpose-output \
 		-o $abund_dir/$i.transpose.tsv
 done
