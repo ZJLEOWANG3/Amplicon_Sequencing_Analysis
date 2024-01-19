@@ -1,0 +1,3 @@
+[submodule "analysis_script"]
+	path = analysis_script
+	url = https://github.com/lguangyu/MothurAmpliconTablePlot.git

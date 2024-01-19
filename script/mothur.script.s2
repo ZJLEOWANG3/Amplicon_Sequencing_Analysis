@@ -1,0 +1,21 @@
+#!/usr/bin/env mothur
+
+# dir settings
+set.dir(input=., output=mothur.output)
+set.logfile(name=mothur.output/s2.mothur.log)
+
+# resume last stage
+set.current(current=s1.current_files.summary)
+
+################################################################################
+# P2. alignment
+################################################################################
+# align seqs to reference
+# NOTE: flip=t is by default on
+align.seqs(fasta=current, template=ref_db/silva.seed_v132.align, flip=t)
+# this summary checks the alignment results
+# the start and end positions are important for later extraction
+summary.seqs(fasta=current, count=current)
+# save current file names
+get.current()
+rename.file(input=current_files.summary, new=s2.current_files.summary)

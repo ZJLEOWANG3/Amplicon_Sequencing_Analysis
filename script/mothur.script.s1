@@ -1,0 +1,22 @@
+#!/usr/bin/env mothur
+
+# dir settings
+set.dir(input=., output=mothur.output)
+set.logfile(name=mothur.output/s1.mothur.log)
+
+################################################################################
+# P1. assembly and dereplicate
+################################################################################
+# make contigs from paired end sequences
+make.contigs(file=mothur.input.list, processors=12)
+# make summary then filtering
+summary.seqs(fasta=current, count=current)
+screen.seqs(fasta=current, count=current, maxambig=0, minlength=225, maxlength=275, maxhomop=8)
+# dereplicate sequences
+unique.seqs(fasta=current, count=current)
+summary.seqs(fasta=current, count=current)
+# save current file names
+# contigsreport results in an annoying error in the current version
+# not needed if fixed in future versions
+get.current(clear=contigsreport)
+rename.file(input=current_files.summary, new=s1.current_files.summary)

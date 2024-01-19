@@ -1,4 +1,10 @@
 # misc
 .DS_Store
+<<<<<<< HEAD
 *.swp
 .devel
+=======
+.swp
+.devel
+tutorial/*.html
+>>>>>>> anal_proj_struct
