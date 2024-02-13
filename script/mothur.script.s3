@@ -27,10 +27,8 @@ unique.seqs(fasta=current, count=current)
 # pre.cluster hard clustering seqs with cluster diameter of <diffs>
 # in this case, maximum distances between seqs in a cluster is 2
 pre.cluster(fasta=current, count=current, diffs=2)
-# identify chimeras using vsearch, in 1.48.0 it only marks not removing
+# identify chimeras using vsearch
 chimera.vsearch(fasta=current, count=current, dereplicate=t)
-# remove chimeras
-remove.seqs(fasta=current, accnos=current)
 
 ################################################################################
 # P4. taxonomy classification
