@@ -46,7 +46,7 @@ Where:
 
 ### 1. Analysis directory prepare
 
-The analysis directory can be downloaded from online repo [git@github.com:lguangyu/Amplicon_Sequencing_Analysis.git](git@github.com:lguangyu/Amplicon_Sequencing_Analysis.git). You can download the repo from the above github page and unzip it, or run:
+The analysis directory can be downloaded from online repo (https://github.com/ZJLEOWANG3/Amplicon_Sequencing_Analysis.git)[https://github.com/ZJLEOWANG3/Amplicon_Sequencing_Analysis.git]. You can download the repo from the above github page and unzip it, or run:
 
 ```bash
 # this is the preferred way than download + unzip
