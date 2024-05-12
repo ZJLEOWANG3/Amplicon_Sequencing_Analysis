@@ -215,7 +215,8 @@ The files with `final` prefix in the output directory `mothur.output` are final 
 To plot a series of abudnance stats across samples, run:
 
 ```bash
-$ bash script/abundance_analysis.sh
+# ve-python-3.10-generic
+bash script/abundance_analysis.sh
 ```
 
 This script invokes python scripts in `analysis_script`, so make sure that `analysis_script` is not empty, in addition `python` and its plotting library `matplotlib` are available. The results will be stored in a new directory `abundance`.
