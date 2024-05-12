@@ -149,6 +149,9 @@ Then, run the script with `mothur`:
 # run by sbatch if in cluster
 ## !!! remember to change the curr_path in script/mothur.script.s1.sbatch
 sbatch script/mothur.script.s1.sbatch
+
+# check results
+vim ./mothur.output/s1.mothur.log
 ```
 
 
@@ -168,6 +171,9 @@ First check and edit file `script/mothur.script.s2`, particularly line 15. The `
 # run by sbatch if in cluster
 ## !!! remember to change the curr_path in script/mothur.script.s1.sbatch
 sbatch script/mothur.script.s2.sbatch
+
+# check results
+vim ./mothur.output/s2.mothur.log
 ```
 
 ### 9. Run analysis stage 3
@@ -197,6 +203,9 @@ In line 40, the database parameters `reference` and `taxonomy` must be correctly
 # run by sbatch if in cluster
 ## !!! remember to change the curr_path in script/mothur.script.s3.sbatch
 sbatch script/mothur.script.s3.sbatch
+
+# check results
+vim ./mothur.output/s3.mothur.log
 ```
 
 The files with `final` prefix in the output directory `mothur.output` are final output files produced by `mothur` SOP.
