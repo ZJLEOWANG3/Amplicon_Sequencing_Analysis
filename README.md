@@ -132,7 +132,14 @@ Stage 1 targets:
 * contig filter by length
 * combine unique contig sequences
 
-First check and edit file `script/mothur.script.s1`, particularly line 14. The minlength and maxlength need to be adjusted according to the amplified region. The example range 225-275 is determined from the length of the V4 region (~254bp) commonly used by our group. Then, run the script with `mothur`:
+First check and edit file `script/mothur.script.s1`, particularly line 14. The minlength and maxlength need to be adjusted according to the amplified region. 
+
+V4 region (~254bp): The example range 225-275 is determined from the length of the V4 region (~254bp) commonly used by our group.[Illumina High-Speed, Multiplexed 16S Microbial Sequencing on the MiSeq® System](https://www.illumina.com/Documents/products/appnotes/appnote_miseq_16S.pdf)
+
+V1-V3 region (~466bp): The range 430-500 is to
+
+Then, run the script with `mothur`:
+
 
 ```bash
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s1 > s1.output
@@ -161,7 +168,7 @@ Stage 3 targets:
 * OTU making
 * ASV making
 
-First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 42. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. In line 42, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
+First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 42. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. In line 40, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
 
 ```bash
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s3
