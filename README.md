@@ -145,6 +145,20 @@ Then, run the script with `mothur`:
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s1 > s1.output
 ```
 
+Or create a sbatch file
+```bash
+#!/bin/bash
+#SBATCH --job-name=mothur_analysis
+#SBATCH --output=mothur_%j.out
+#SBATCH --error=mothur_%j.err
+#SBATCH --time=02:00:00
+#SBATCH --mem=8G
+#SBATCH --cpus-per-task=12
+
+curr_path = 
+/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur $curr_path/script/mothur.script.s1 > $curr_path/s1.output
+```
+
 ### 8. Run analysis stage 2
 
 Stage 2 targets:
