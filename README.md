@@ -133,10 +133,11 @@ Stage 1 targets:
 * combine unique contig sequences
 
 First check and edit file `script/mothur.script.s1`, particularly line 14. The minlength and maxlength need to be adjusted according to the amplified region. 
+Typically, the 2.5% - 97.5%
 
 V4 region (~254bp): The example range 225-275 is determined from the length of the V4 region (~254bp) commonly used by our group.[Illumina High-Speed, Multiplexed 16S Microbial Sequencing on the MiSeq® System](https://www.illumina.com/Documents/products/appnotes/appnote_miseq_16S.pdf)
 
-V1-V3 region (~466bp): The range 430-500 is appropriate. [Illustrations here](https://help.ezbiocloud.net/16s-rrna-and-16s-rrna-gene/)
+V1-V3 region (~466bp): The range 450-520 is appropriate. [Illustrations here](https://help.ezbiocloud.net/16s-rrna-and-16s-rrna-gene/)
 
 Then, run the script with `mothur`:
 
