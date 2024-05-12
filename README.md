@@ -50,13 +50,13 @@ The analysis directory can be downloaded from online repo [https://github.com/ZJ
 
 ```bash
 # this is the preferred way than download + unzip
-$ git clone --recurse-submodules git@github.com:lguangyu/Amplicon_Sequencing_Analysis.git
+git clone --recurse-submodules git@github.com:lguangyu/Amplicon_Sequencing_Analysis.git
 ```
 
 The `analysis_script` folder contains necessary scripts to run downstream analysis, so make sure it's not empty if those analyses are planned. If empty, stuff it with another git call:
 
 ```bash
-$ git submodule update --init --remote --recursive
+git submodule update --init --remote --recursive
 ```
 
 ### 2. Database prepare
@@ -101,7 +101,7 @@ SAMPLE_2
 ### 5. Preprocess
 
 ```bash
-$ bash script/preprocess.sh
+bash script/preprocess.sh
 ```
 
 This script will call `sickle` do run QC, and output results in `reads_qc/`.
@@ -127,10 +127,10 @@ Stage 1 targets:
 * contig filter by length
 * combine unique contig sequences
 
-First check and edit file `script/mothur.script.s1`, particularly line 13. The minlength and maxlength need to be adjusted according to the amplified region. The example range 225-275 is determined from the length of the V4 region (~254bp) commonly used by our group. Then, run the script with `mothur`:
+First check and edit file `script/mothur.script.s1`, particularly line 14. The minlength and maxlength need to be adjusted according to the amplified region. The example range 225-275 is determined from the length of the V4 region (~254bp) commonly used by our group. Then, run the script with `mothur`:
 
 ```bash
-$ mothur script/mothur.script.s1
+/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s1 > s1.output
 ```
 
 ### 8. Run analysis stage 2
@@ -142,7 +142,7 @@ Stage 2 targets:
 First check and edit file `script/mothur.script.s2`, particularly line 15. The `template` argument needs to be changed according to the alignment database used. Then, run the the script with `mothur`:
 
 ```bash
-$ mothur script/mothur.script.s1
+/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s2 > s2.output
 ```
 
 ### 9. Run analysis stage 3
@@ -159,7 +159,7 @@ Stage 3 targets:
 First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 42. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. In line 42, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
 
 ```bash
-$ mothur script/mothur.script.s3
+/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s3
 ```
 
 The files with `final` prefix in the output directory `mothur.output` are final output files produced by `mothur` SOP.
