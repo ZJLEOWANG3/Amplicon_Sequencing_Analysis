@@ -143,22 +143,15 @@ Then, run the script with `mothur`:
 
 
 ```bash
+# run by bash
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s1 > s1.output
+
+# run by sbatch if in cluster
+## !!! remember to change the curr_path in script/mothur.script.s1.sbatch
+sbatch script/mothur.script.s1.sbatch
 ```
 
-Or create a sbatch file
-```bash
-#!/bin/bash
-#SBATCH --job-name=mothur_analysis
-#SBATCH --output=mothur_%j.out
-#SBATCH --error=mothur_%j.err
-#SBATCH --time=04:00:00
-#SBATCH --mem=16G
-#SBATCH --cpus-per-task=12
 
-curr_path= 
-/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur $curr_path/script/mothur.script.s1 > $curr_path/s1.output
-```
 
 ### 8. Run analysis stage 2
 
@@ -169,7 +162,12 @@ Stage 2 targets:
 First check and edit file `script/mothur.script.s2`, particularly line 15. The `template` argument needs to be changed according to the alignment database used. Then, run the the script with `mothur`:
 
 ```bash
+# run by bash
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s2 > s2.output
+
+# run by sbatch if in cluster
+## !!! remember to change the curr_path in script/mothur.script.s1.sbatch
+sbatch script/mothur.script.s2.sbatch
 ```
 
 ### 9. Run analysis stage 3
@@ -183,14 +181,22 @@ Stage 3 targets:
 * OTU making
 * ASV making
 
-First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 40. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. 
+First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 40. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). 
 
-The optimal strategy is to pick the max in the start (typically, 97.5%), the min in the end (2.5% typically, or mean).
+V4: The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. 
+V1-3: The example values `start=1046, end=13862`.
+
+In Line 14: The optimal strategy is to pick the max in the start (typically, 97.5%), the min in the end (2.5% typically, or mean).
 
 In line 40, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
 
 ```bash
-/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s3
+# run by bash
+/home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s3 > s3.output
+
+# run by sbatch if in cluster
+## !!! remember to change the curr_path in script/mothur.script.s3.sbatch
+sbatch script/mothur.script.s3.sbatch
 ```
 
 The files with `final` prefix in the output directory `mothur.output` are final output files produced by `mothur` SOP.
