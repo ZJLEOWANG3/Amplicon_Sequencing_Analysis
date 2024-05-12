@@ -1,1 +1,8 @@
-"J5506_S216_L001_R1_001.fastq  J5506_S219_L001_R1_001.fastq  J5506_S222_L001_R1_001.fastq" ls *.fastq | sed 's/_[R][12]_001\.fastq$//' | uniq > samples.list 
+Example1: "J5506_S216_L001_R1_001.fastq  J5506_S219_L001_R1_001.fastq  J5506_S222_L001_R1_001.fastq"
+# 1. Remove the strings between R1 and .fastq
+for file in *R1_001.fastq *R2_001.fastq; do
+    newname=$(echo "$file" | sed 's/_001\.fastq$/.fastq/')
+    mv "$file" "$newname"
+done
+# 2. get the prefix and remove duplicates
+ls *.fastq | sed 's/_[R][12]\.fastq$//' | uniq > samples.list 
