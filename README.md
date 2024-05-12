@@ -78,7 +78,7 @@ Once prepared, put these three files into `ref_db/`, for example:
 You can get some `mothur`-prepared dabase files from [https://mothur.org/wiki/silva_reference_files/](https://mothur.org/wiki/silva_reference_files/), or create your own.
 
 ```bash
-wget $link
+wget $link-Full-length sequences and taxonomy references
 tar -xzf $filename
 ```
 
