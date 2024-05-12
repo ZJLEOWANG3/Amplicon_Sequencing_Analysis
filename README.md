@@ -75,7 +75,7 @@ Once prepared, put these three files into `ref_db/`, for example:
 └── silva.nr_v138_1.tax
 </pre>
 
-You can get some `mothur`-prepared dabase files from [https://mothur.org](https://mothur.org), or create your own.
+You can get some `mothur`-prepared dabase files from [https://mothur.org/wiki/silva_reference_files/](https://mothur.org/wiki/silva_reference_files/), or create your own.
 
 ### 3. Reads prepare
 
