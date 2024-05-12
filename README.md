@@ -183,7 +183,11 @@ Stage 3 targets:
 * OTU making
 * ASV making
 
-First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 42. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. In line 40, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
+First check and edit file `script/mothur.script.s3`, particularly line 14 and ling 40. In line 14, the filtering coordinates should be adjusted according to the last `summary.seqs()` results in the stage 2 log (`mothur.output/s2.mothur.log`). The example values `start=13870, end=23440` are subject to change under different region, primer, database, or parameters in previous steps. 
+
+The optimal strategy is to pick the max in the start (typically, 97.5%), the min in the end (2.5% typically, or mean).
+
+In line 40, the database parameters `reference` and `taxonomy` must be correctly configured. Then, run the script with `mothur`:
 
 ```bash
 /home/a.onnis-hayden/opt/mothur/1.48.0/bin/mothur script/mothur.script.s3
