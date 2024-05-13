@@ -217,6 +217,7 @@ To plot a series of abudnance stats across samples, run:
 ```bash
 # ve-python-3.10-generic
 bash script/abundance_analysis.sh
+python analysis_script/pca_plot_mothur_taxonomy_abundance.py abundance/genus.tsv > abundance/pca_plot_genus.png
 ```
 
 This script invokes python scripts in `analysis_script`, so make sure that `analysis_script` is not empty, in addition `python` and its plotting library `matplotlib` are available. The results will be stored in a new directory `abundance`.
@@ -226,7 +227,8 @@ This script invokes python scripts in `analysis_script`, so make sure that `anal
 There are two ways to pack and archive the results:
 
 ```bash
-$ bash script/pack_output.lite.sh
+# save abundance/, reads/, reads_qc/, script/
+bash script/pack_output.lite.sh
 ```
 
 will pack only those essential bits (e.g. `mothur.output/final*` and logs) for downstream analysis. In most cases they are sufficient. Alternatively,
