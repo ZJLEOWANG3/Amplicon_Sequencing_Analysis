@@ -8,7 +8,7 @@ tar -jcf mothur.output.lite.tar.bz2 \
 	mothur.input.list \
 	mothur.output/final.* \
 	mothur.output/*.mothur.log \
-	mothur.output/*.current_files.summary \ 
+	mothur.output/*.current_files.summary \
  	abundance \
   	reads \
    	reads_qc \
