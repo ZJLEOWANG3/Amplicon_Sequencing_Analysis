@@ -227,7 +227,7 @@ This script invokes python scripts in `analysis_script`, so make sure that `anal
 There are two ways to pack and archive the results:
 
 ```bash
-# save abundance/, reads/, reads_qc/, script/
+# save abundance/, reads/, reads_qc/, script/, mothur.output/final*, logs
 bash script/pack_output.lite.sh
 ```
 
